@@ -3,7 +3,6 @@ import org.jenkinsci.gradle.plugins.jpi.JpiLicense
 import org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask
 import org.jetbrains.kotlin.gradle.internal.KaptTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-//import VERSIONS.*
 
 plugins {
     kotlin("jvm") version "1.4.21"
@@ -19,7 +18,7 @@ repositories {
 }
 
 dependencies {
-//    implementation("org.jenkins-ci.plugins.workflow:workflow-step-api:${workflowStepApiPluginVersion}@jar")
+    implementation("org.jenkins-ci.plugins.workflow:workflow-step-api:2.23@jar")
     implementation("com.google.api-client:google-api-client:1.31.1")
     implementation("com.google.apis:google-api-services-drive:v3-rev20201130-1.31.0")
     implementation("com.google.auth:google-auth-library-oauth2-http:0.22.1")
@@ -42,7 +41,7 @@ jenkinsPlugin {
     shortName = "bonitasoft-gdrive-upload"
     gitHubUrl = "https://github.com/bonitasoft/bonita-ci/"
     url = "https://github.com/bonitasoft/bonita-ci/"
-//    jenkinsVersion.set(jenkinsCoreVersion)
+    jenkinsVersion.set("2.263.2")
     pluginFirstClassLoader = true
 }
 
