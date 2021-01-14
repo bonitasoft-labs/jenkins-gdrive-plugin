@@ -1,2 +1,5 @@
 build
 work
+.gradle
+.idea
+.iml
