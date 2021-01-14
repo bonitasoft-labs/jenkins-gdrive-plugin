@@ -21,8 +21,8 @@ import javax.activation.MimetypesFileTypeMap
 
 class GDriveUploadStepExecution(
         val googleCredentials: String,
-        val toCopy: String,
-        val destinationFolderId: String,
+        val source: String,
+        val destinationId: String,
         context: StepContext,
         val newOwnerEmail: String? = null) : SynchronousNonBlockingStepExecution<Void>(context) {
 
@@ -42,13 +42,13 @@ class GDriveUploadStepExecution(
 
             val drive = Drive.Builder(ApacheHttpTransport(), JacksonFactory(), requestInitializer).setApplicationName("GDrive Upload").build()
 
-            logger.println("Retrieving destination folder with id $destinationFolderId")
+            logger.println("Retrieving destination folder with id $destinationId")
             val destinationFolder = retrieveFolder(drive)
 
 
 
-            logger.println("Will upload $toCopy inside Drive folder ${destinationFolder.name} with id ${destinationFolder.id}")
-            copy(logger, drive, java.io.File(toCopy), destinationFolder)
+            logger.println("Will upload $source inside Drive folder ${destinationFolder.name} with id ${destinationFolder.id}")
+            copy(logger, drive, java.io.File(source), destinationFolder)
             logger.println("Uploaded all files to ${destinationFolder.id}")
             return null
         } catch (e: Throwable) {
@@ -87,9 +87,9 @@ class GDriveUploadStepExecution(
     }
 
     private fun retrieveFolder(drive: Drive): File {
-        val destinationFolder = drive.files().get(destinationFolderId).setSupportsAllDrives(true).execute()
+        val destinationFolder = drive.files().get(destinationId).setSupportsAllDrives(true).execute()
         if (!destinationFolder.mimeType.equals(FOLDER_MIMETYPE)) {
-            throw AbortException("The id $destinationFolderId given as the destination folder is not a folder but ${destinationFolder.mimeType}")
+            throw AbortException("The id $destinationId given as the destination folder is not a folder but ${destinationFolder.mimeType}")
         }
         return destinationFolder
     }

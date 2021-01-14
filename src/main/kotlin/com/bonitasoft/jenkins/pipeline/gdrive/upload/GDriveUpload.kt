@@ -12,14 +12,14 @@ class GDriveUpload
 
 @DataBoundConstructor
 constructor(
-	val googleCredentials: String,
-	val toCopy: String,
-	val destinationFolderId: String
+		val googleCredentials: String,
+		val source: String,
+		val destinationId: String
 ) : Step() {
 	override fun start(context: StepContext) = GDriveUploadStepExecution(
 			googleCredentials,
-			toCopy,
-			destinationFolderId,
+			source,
+			destinationId,
 			context
 	)
 
