@@ -1,4 +1,4 @@
-package com.bonitasoft.jenkins.pipeline.gdrive.upload
+package org.bonitasoft.gdrive.jenkins
 
 import hudson.Extension
 import hudson.FilePath
