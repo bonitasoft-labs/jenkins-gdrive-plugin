@@ -32,12 +32,23 @@ jobs:
           draft: false
           prerelease: false
       - name: Upload Release Asset
-        id: upload-release-asset
+        id: upload-release-asset-plugin
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ./build/libs/jenkins-gdrive-plugin.hpi
+          # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./gdrive-jenkins/build/libs/jenkins-gdrive-plugin.hpi
           asset_name: jenkins-gdrive-plugin.hpi
+          asset_content_type: application/zip
+      - name: Upload Release Asset
+        id: upload-release-asset-cli
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./gdrive-cli/build/distributions/gdrive-cli-${{ steps.create_release.outputs.upload_url }}.zip
+          asset_name: gdrive-cli-${{ steps.create_release.outputs.upload_url }}.zip
           asset_content_type: application/zip
