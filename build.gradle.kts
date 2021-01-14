@@ -25,11 +25,11 @@ dependencies {
     implementation("com.google.auth:google-auth-library-oauth2-http:0.22.1")
 
     // only used when running the test server locally
-//    jenkinsServer("org.jenkins-ci.plugins.workflow", "workflow-step-api", workflowStepApiPluginVersion)
-//    jenkinsServer("org.jenkins-ci.plugins.workflow", "workflow-aggregator", workflowAggregatorPluginVersion)
+    jenkinsServer("org.jenkins-ci.plugins.workflow", "workflow-step-api", "2.23")
+    jenkinsServer("org.jenkins-ci.plugins.workflow", "workflow-aggregator", "2.6")
 
     // SezPoz is used to process @hudson.Extension and other annotations
-//    kapt("net.java.sezpoz:sezpoz:${sezPozVersion}")
+    kapt("net.java.sezpoz:sezpoz:1.13")
 }
 
 java {
