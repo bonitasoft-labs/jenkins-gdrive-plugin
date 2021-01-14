@@ -22,8 +22,8 @@ pipeline {
                 withCredentials([string(credentialsId: 'gdrive', variable: 'GDRIVE_CREDENTIALS')]) {
                     gdriveUpload(
                         googleCredentials: GDRIVE_CREDENTIALS,
-                        toCopy: "/Users/baptiste/work/test_upload",
-                        destinationFolderId: "14_Xpzuld0lGyg7HgZojwNsJsITW5jTh9"
+                        source: "/Users/baptiste/work/test_upload",
+                        destinationId: "14_Xpzuld0lGyg7HgZojwNsJsITW5jTh9"
                         )
                 }
             }
