@@ -43,7 +43,7 @@ jenkinsPlugin {
     gitHubUrl = "https://github.com/bonitasoft-labs/jenkins-gdrive-plugin/"
     url = "https://github.com/bonitasoft-labs/jenkins-gdrive-plugin/"
     jenkinsVersion.set("2.263.2")
-    compatibleSinceVersion.set("2.249.3")
+    compatibleSinceVersion = "2.249.3"
     pluginFirstClassLoader = true
 }
 
