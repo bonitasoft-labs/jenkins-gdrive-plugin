@@ -9,7 +9,6 @@ import com.google.api.services.drive.DriveScopes
 import com.google.api.services.drive.model.File
 import com.google.auth.http.HttpCredentialsAdapter
 import com.google.auth.oauth2.GoogleCredentials
-import java.io.PrintStream
 
 class GDriveUploadTask(private val googleCredentials: String,
 					   private val source: String,
