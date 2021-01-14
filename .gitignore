@@ -3,3 +3,4 @@ work
 .gradle
 .idea
 .iml
+.DS_Store

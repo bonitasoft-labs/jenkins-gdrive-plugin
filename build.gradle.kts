@@ -10,6 +10,7 @@ plugins {
     // ICU is a dependency of jenkins
     kotlin("kapt") version "1.4.21"
     id("org.jenkins-ci.jpi") version ("0.41.0")
+    id("com.bonitasoft.gradle.bonita-release") version "0.1.53"
 }
 
 repositories {
