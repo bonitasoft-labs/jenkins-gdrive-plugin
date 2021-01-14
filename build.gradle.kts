@@ -38,11 +38,12 @@ java {
 
 
 jenkinsPlugin {
-    displayName = "Bonitasoft Google drive upload"
-    shortName = "bonitasoft-gdrive-upload"
-    gitHubUrl = "https://github.com/bonitasoft/bonita-ci/"
-    url = "https://github.com/bonitasoft/bonita-ci/"
+    displayName = "Jenkins Google Drive plugin"
+    shortName = "jenkins-gdrive-plugin"
+    gitHubUrl = "https://github.com/bonitasoft-labs/jenkins-gdrive-plugin/"
+    url = "https://github.com/bonitasoft-labs/jenkins-gdrive-plugin/"
     jenkinsVersion.set("2.263.2")
+    compatibleSinceVersion = "2.249.3"
     pluginFirstClassLoader = true
 }
 
