@@ -1,0 +1,1 @@
+# this only avoid the install of the plugin by the task `server` to fail
