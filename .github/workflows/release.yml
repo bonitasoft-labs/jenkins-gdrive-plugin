@@ -31,7 +31,7 @@ jobs:
           body: "Release ${{ steps.extract_version.outputs.version }}"
           draft: false
           prerelease: false
-      - name: Upload Release Asset
+      - name: Upload Release Plugin Asset
         id: upload-release-asset-plugin
         uses: actions/upload-release-asset@v1
         env:
@@ -42,7 +42,7 @@ jobs:
           asset_path: ./gdrive-jenkins/build/libs/jenkins-gdrive-plugin.hpi
           asset_name: jenkins-gdrive-plugin.hpi
           asset_content_type: application/zip
-      - name: Upload Release Asset
+      - name: Upload Release CLI Asset
         id: upload-release-asset-cli
         uses: actions/upload-release-asset@v1
         env:
