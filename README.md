@@ -24,7 +24,7 @@ pipeline {
                         googleCredentials: GDRIVE_CREDENTIALS,
                         source: "/Users/baptiste/work/test_upload",
                         destinationId: "14_Xpzuld0lGyg7HgZojwNsJsITW5jTh9"
-                        )
+                    )
                 }
             }
         }
