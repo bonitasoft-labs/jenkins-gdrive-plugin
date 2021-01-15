@@ -13,7 +13,8 @@ import com.google.auth.oauth2.GoogleCredentials
 class GDriveUploadTask(private val googleCredentials: String,
 					   private val source: String,
 					   private val destinationId: String,
-					   private val logger: Logger) {
+					   private val logger: Logger,
+					   private val renameTo: String) {
 
 	companion object FileUtils {
 		private val FOLDER_MIMETYPE = "application/vnd.google-apps.folder"
@@ -33,22 +34,23 @@ class GDriveUploadTask(private val googleCredentials: String,
 
 
 		logger.info("Will upload $source inside Drive folder ${destinationFolder.name} with id ${destinationFolder.id}")
-		copy(drive, java.io.File(source), destinationFolder)
+		copy(drive, java.io.File(source), destinationFolder, renameTo)
 		logger.info("Uploaded all files to ${destinationFolder.id}")
 
-		return;
+		return
 	}
 
-	private fun copy(drive: Drive, file: java.io.File, destinationFolder: File) {
+	private fun copy(drive: Drive, file: java.io.File, destinationFolder: File, renameTo: String = "") {
 		logger.debug("Processing ${file.absolutePath}")
+		val fileName = renameTo.trim().ifEmpty { file.name }
 		if (file.isDirectory) {
-			val newFolder = createFolder(drive, file.name, destinationFolder)
+			val newFolder = createFolder(drive, fileName, destinationFolder)
 			logger.debug("created folder ${newFolder.name} with id ${newFolder.id}")
 			file.listFiles().forEach { child ->
-				copy( drive, child, newFolder)
+				copy(drive, child, newFolder)
 			}
 		} else {
-			val uploadFile = uploadFile(drive, file, destinationFolder)
+			val uploadFile = uploadFile(drive, file, fileName, destinationFolder)
 			logger.info("Uploaded file folder ${uploadFile.name} with id ${uploadFile.id}")
 		}
 	}
@@ -61,9 +63,9 @@ class GDriveUploadTask(private val googleCredentials: String,
 		return destinationFolder
 	}
 
-	private fun uploadFile(drive: Drive, file: java.io.File, destinationFolder: File): File {
+	private fun uploadFile(drive: Drive, file: java.io.File, fileName: String, destinationFolder: File): File {
 		return drive.files().create(File().apply {
-			name = file.name
+			name = fileName
 			parents = mutableListOf(destinationFolder.id)
 		}, FileContent(null, file))
 				.setFields("id").setSupportsAllDrives(true).execute()

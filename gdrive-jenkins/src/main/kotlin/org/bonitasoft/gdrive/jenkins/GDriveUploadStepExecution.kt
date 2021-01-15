@@ -12,6 +12,7 @@ class GDriveUploadStepExecution(
 		private val googleCredentials: String,
 		private val source: String,
 		private val destinationId: String,
+		private val renameTo: String,
 		context: StepContext) : SynchronousNonBlockingStepExecution<Void>(context) {
 
 	override fun run(): Void? {
@@ -23,8 +24,8 @@ class GDriveUploadStepExecution(
 				override fun warn(message: String) = logger.println("WARN: $message")
 				override fun error(message: String) = logger.println("ERROR: $message")
 			}
-			val task = GDriveUploadTask(googleCredentials, source, destinationId, gdriveLogger)
-			task.execute();
+			val task = GDriveUploadTask(googleCredentials, source, destinationId, gdriveLogger, renameTo)
+			task.execute()
 			return null
 		} catch (e: Throwable) {
 			e.printStackTrace()

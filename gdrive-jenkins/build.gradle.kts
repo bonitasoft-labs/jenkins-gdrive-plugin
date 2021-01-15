@@ -27,10 +27,12 @@ dependencies {
 jenkinsPlugin {
 	displayName = "Jenkins Google Drive plugin"
 	shortName = "jenkins-gdrive-plugin"
+	description = "This plugin file or folders to google drive"
 	gitHubUrl = "https://github.com/bonitasoft-labs/jenkins-gdrive-plugin/"
 	url = "https://github.com/bonitasoft-labs/jenkins-gdrive-plugin/"
 	jenkinsVersion.set("2.249.3")
 	pluginFirstClassLoader = true
+	workDir = buildDir.resolve("work")
 }
 
 kapt {

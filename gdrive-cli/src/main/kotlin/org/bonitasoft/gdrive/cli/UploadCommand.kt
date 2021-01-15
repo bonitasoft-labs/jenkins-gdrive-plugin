@@ -11,8 +11,11 @@ class UploadCommand : Runnable {
 
 	val logger = LoggerFactory.getLogger(UploadCommand::class.java)
 
-	@CommandLine.Option(names = ["-c", "--credentials"], required = true)
+	@CommandLine.Option(names = ["-c", "--credentials"], required = true, description = ["Path to the credential file to use."])
 	lateinit var creds: File
+
+	@CommandLine.Option(names = ["--renameTo"], description = ["Rename the file or folder in to that name."])
+	var renameTo: String = ""
 
 	@CommandLine.Parameters(paramLabel = "source", description = ["Source path to the file or folder to upload."])
 	lateinit var source: String
@@ -28,7 +31,7 @@ class UploadCommand : Runnable {
 	}
 
 	override fun run() {
-		val task = GDriveUploadTask(creds.readText(), source, destinationId, gdriveLogger)
+		val task = GDriveUploadTask(creds.readText(), source, destinationId, gdriveLogger, renameTo)
 		task.execute()
 	}
 

@@ -14,12 +14,14 @@ class GDriveUpload
 constructor(
 		val googleCredentials: String,
 		val source: String,
-		val destinationId: String
+		val destinationId: String,
+		val renameTo: String
 ) : Step() {
 	override fun start(context: StepContext) = GDriveUploadStepExecution(
 			googleCredentials,
 			source,
 			destinationId,
+			renameTo,
 			context
 	)
 
