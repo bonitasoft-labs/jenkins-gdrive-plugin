@@ -17,13 +17,19 @@ Configure as follow where
 pipeline {
     agent any
     stages {
+        stage('prepare file ') {
+            steps {
+                sh "echo 'someContent' > toUpload.txt"
+            }
+        }
         stage("upload to gdrive") {
             steps {
                 withCredentials([string(credentialsId: 'gdrive', variable: 'GDRIVE_CREDENTIALS')]) {
                     gdriveUpload(
                         googleCredentials: GDRIVE_CREDENTIALS,
-                        source: "/Users/baptiste/work/test_upload",
-                        destinationId: "14_Xpzuld0lGyg7HgZojwNsJsITW5jTh9"
+                        source: "toUpload.txt",
+                        destinationId: "14_Xpzuld0lGyg7HgZojwNsJsITW5jTh9",
+                        renameTo: "uploaded.txt"
                     )
                 }
             }

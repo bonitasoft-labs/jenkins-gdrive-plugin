@@ -43,15 +43,21 @@ class GDriveUploadTask(private val googleCredentials: String,
 	private fun copy(drive: Drive, file: java.io.File, destinationFolder: File, renameTo: String = "") {
 		logger.debug("Processing ${file.absolutePath}")
 		val fileName = renameTo.trim().ifEmpty { file.name }
+		if (fileName != file.name) {
+			logger.info("'${file.name}' will be renamed to '$fileName'")
+		}
+		if (!file.exists()) {
+			throw RuntimeException("The source file does not exists: ${file.absolutePath}");
+		}
 		if (file.isDirectory) {
 			val newFolder = createFolder(drive, fileName, destinationFolder)
-			logger.debug("created folder ${newFolder.name} with id ${newFolder.id}")
+			logger.debug("Created folder $fileName with id ${newFolder.id}")
 			file.listFiles().forEach { child ->
 				copy(drive, child, newFolder)
 			}
 		} else {
 			val uploadFile = uploadFile(drive, file, fileName, destinationFolder)
-			logger.info("Uploaded file folder ${uploadFile.name} with id ${uploadFile.id}")
+			logger.info("Uploaded file ${uploadFile.name} with id ${uploadFile.id}")
 		}
 	}
 
