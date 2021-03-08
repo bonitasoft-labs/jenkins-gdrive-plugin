@@ -34,6 +34,18 @@ pipeline {
                 }
             }
         }
+        stage("move specificFile") {
+            steps {
+                withCredentials([string(credentialsId: 'gdrive', variable: 'GDRIVE_CREDENTIALS')]) {
+                    gdriveMove(
+                        googleCredentials: GDRIVE_CREDENTIALS,
+                        sourceId: "k543jkh32HgZojwNsJsITW5jThdsfds",
+                        destinationId: "14_Xpzuld0lGyg7HgZojwNsJsITW5jTh9",
+                        renameTo: "moved folder"
+                    )
+                }
+            }
+        }
     }
 }
 ```

@@ -12,12 +12,15 @@ class MoveCommand : BaseCommand() {
 	@CommandLine.Parameters(paramLabel = "sourceId", description = ["Id of the source folder or file to move"])
 	lateinit var sourceId: String
 
+	@CommandLine.Parameters(paramLabel = "elementName", description = ["Id of the folder containing the file or folder to move"])
+	lateinit var elementName: String
+
 	@CommandLine.Parameters(paramLabel = "destinationId", description = ["Id of the destination folder on Google drive where to upload to."])
 	lateinit var destinationId: String
 
 
 	override fun run() {
-		GDriveMoveTask(parentCommand.creds.readText(), sourceId, destinationId, gdriveLogger, renameTo).execute()
+		GDriveMoveTask(parentCommand.creds.readText(), sourceId,elementName, destinationId, gdriveLogger, renameTo).execute()
 	}
 
 }
