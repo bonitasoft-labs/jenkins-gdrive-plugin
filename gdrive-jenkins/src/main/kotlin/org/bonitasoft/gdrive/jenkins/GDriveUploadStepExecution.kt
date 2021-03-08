@@ -26,6 +26,7 @@ class GDriveUploadStepExecution(
 		try {
 
 			val workspace = context.get(FilePath::class.java)!!
+			logger.println("Starting the upload of $source to the destination $destinationId, all logs will be displayed once the upload is completed")
 			val logs = workspace.child(source).act(UploadFile(googleCredentials, destinationId, renameTo))
 			logs.forEach { logger.println(it) }
 			return null
