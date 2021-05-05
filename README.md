@@ -62,5 +62,4 @@ The compilation uses `kapt` for annotation processing along with `net.java.sezpo
 
 ## Google Drive API Key
 
-To generate a new API Key
-//TODO
+To generate a new API Key you need to go [here](https://console.cloud.google.com/iam-admin/serviceaccounts)
