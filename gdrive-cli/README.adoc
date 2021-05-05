@@ -1,0 +1,16 @@
+= Gdrive-cli
+
+Usage development mode:
+
+    ./gradlew run --args " --help"
+
+
+To run debug mode on your IDE, add `--debug-jvm`
+
+## How to upload folder
+
+    ./gradlew run --args " -c path/credentialFile.json upload path/folderToUpload destinationFolderPath --renameTo newFolderName"
+
+## How to move folder
+
+    ./gradlew run --args " -c path/credentialFile.json move sourceFolderId folderName destinationFolderId --renameTo newFolderName" --debug-jvm

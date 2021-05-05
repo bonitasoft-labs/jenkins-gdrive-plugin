@@ -34,6 +34,18 @@ pipeline {
                 }
             }
         }
+        stage("move specificFile") {
+            steps {
+                withCredentials([string(credentialsId: 'gdrive', variable: 'GDRIVE_CREDENTIALS')]) {
+                    gdriveMove(
+                        googleCredentials: GDRIVE_CREDENTIALS,
+                        sourceId: "k543jkh32HgZojwNsJsITW5jThdsfds",
+                        destinationId: "14_Xpzuld0lGyg7HgZojwNsJsITW5jTh9",
+                        renameTo: "moved folder"
+                    )
+                }
+            }
+        }
     }
 }
 ```
@@ -48,3 +60,6 @@ pipeline {
 The compilation uses `kapt` for annotation processing along with `net.java.sezpoz:sezpoz` to process `@Extension` annotations
 
 
+## Google Drive API Key
+
+To generate a new API Key you need to go [here](https://console.cloud.google.com/iam-admin/serviceaccounts)
