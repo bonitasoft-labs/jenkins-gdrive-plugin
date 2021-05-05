@@ -12,14 +12,15 @@ class GDriveMoveStepExecution(
 		private val googleCredentials: String,
 		private val sourceId: String,
 		private val elementName: String,
-		private val destinationId: String,
+		private val destinationParentFolderId: String,
+		private val destinationFolderName: String,
 		private val renameTo: String,
 		context: StepContext) : SynchronousNonBlockingStepExecution<Void>(context) {
 
 	override fun run(): Void? {
 		val logger = context.get(TaskListener::class.java)?.logger!!
 		try {
-			GDriveMoveTask(googleCredentials, sourceId, elementName, destinationId, object : Logger {
+			GDriveMoveTask(googleCredentials, sourceId, elementName, destinationParentFolderId, destinationFolderName, object : Logger {
 				override fun debug(message: String) = logger.println("DEBUG: $message")
 				override fun info(message: String) = logger.println("INFO: $message")
 				override fun warn(message: String) = logger.println("WARN: $message")

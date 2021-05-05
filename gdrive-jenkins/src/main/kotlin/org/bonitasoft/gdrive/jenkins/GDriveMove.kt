@@ -15,14 +15,16 @@ constructor(
 		val googleCredentials: String,
 		val sourceId: String,
 		val elementName: String,
-		val destinationId: String,
+		val destinationParentFolderId: String,
+		val destinationFolderName: String,
 		val renameTo: String
 ) : Step() {
 	override fun start(context: StepContext) = GDriveMoveStepExecution(
 			googleCredentials,
 			sourceId,
 			elementName,
-			destinationId,
+			destinationParentFolderId,
+			destinationFolderName,
 			renameTo,
 			context
 	)
