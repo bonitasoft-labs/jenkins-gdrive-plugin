@@ -39,11 +39,11 @@ abstract class GDriveTask(private val logger: Logger, private val googleCredenti
         return destinationFolder
     }
 
-    protected fun createFolder(drive: Drive, folderName: String, destinationFolder: File): File {
+    protected fun createFolder(drive: Drive, folderName: String, parentFolderId: String): File {
         var folder = File().apply {
             name = folderName
             mimeType = FOLDER_MIMETYPE
-            parents = mutableListOf(destinationFolder.id)
+            parents = mutableListOf(parentFolderId)
         }
         folder = drive.files().create(folder).setFields("id").setSupportsAllDrives(true).execute()
         return folder

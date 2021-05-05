@@ -39,8 +39,10 @@ pipeline {
                 withCredentials([string(credentialsId: 'gdrive', variable: 'GDRIVE_CREDENTIALS')]) {
                     gdriveMove(
                         googleCredentials: GDRIVE_CREDENTIALS,
-                        sourceId: "k543jkh32HgZojwNsJsITW5jThdsfds",
-                        destinationId: "14_Xpzuld0lGyg7HgZojwNsJsITW5jTh9",
+                        sourceId: "123XY",
+                        elementName: "folder to move",    
+                        destinationParentFolderId: "1234XXX", 
+                        destinationFolderName: "7.12.X", 
                         renameTo: "moved folder"
                     )
                 }

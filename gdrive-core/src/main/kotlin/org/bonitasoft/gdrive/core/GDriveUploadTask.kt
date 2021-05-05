@@ -1,6 +1,5 @@
 package org.bonitasoft.gdrive.core
 
-import com.google.api.client.http.FileContent
 import com.google.api.services.drive.Drive
 import com.google.api.services.drive.model.File
 
@@ -31,7 +30,7 @@ class GDriveUploadTask(googleCredentials: String,
 			throw RuntimeException("The source file does not exists: ${file.absolutePath}");
 		}
 		if (file.isDirectory) {
-			val newFolder = createFolder(drive, fileName, destinationFolder)
+			val newFolder = createFolder(drive, fileName, destinationFolder.id)
 			logger.debug("Created folder $fileName with id ${newFolder.id}")
 			file.listFiles().forEach { child ->
 				copy(drive, child, newFolder)

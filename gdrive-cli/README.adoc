@@ -13,4 +13,4 @@ To run debug mode on your IDE, add `--debug-jvm`
 
 ## How to move folder
 
-    ./gradlew run --args " -c path/credentialFile.json move sourceFolderId folderName destinationFolderId --renameTo newFolderName" --debug-jvm
+    ./gradlew run --args " -c path/credentialFile.json move sourceFolderId folderName destinationParentFolderId destinationFolderName --renameTo newFolderName" --debug-jvm
