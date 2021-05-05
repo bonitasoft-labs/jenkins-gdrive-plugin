@@ -11,6 +11,7 @@ import org.jenkinsci.plugins.workflow.steps.SynchronousNonBlockingStepExecution
 class GDriveMoveStepExecution(
 		private val googleCredentials: String,
 		private val sourceId: String,
+		private val elementName: String,
 		private val destinationId: String,
 		private val renameTo: String,
 		context: StepContext) : SynchronousNonBlockingStepExecution<Void>(context) {
@@ -18,7 +19,7 @@ class GDriveMoveStepExecution(
 	override fun run(): Void? {
 		val logger = context.get(TaskListener::class.java)?.logger!!
 		try {
-			GDriveMoveTask(googleCredentials, sourceId, destinationId, object : Logger {
+			GDriveMoveTask(googleCredentials, sourceId, elementName, destinationId, object : Logger {
 				override fun debug(message: String) = logger.println("DEBUG: $message")
 				override fun info(message: String) = logger.println("INFO: $message")
 				override fun warn(message: String) = logger.println("WARN: $message")
