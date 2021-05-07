@@ -55,9 +55,9 @@ pipeline {
 
 # Build
 
-`gw :plugins:gdrive-upload:server` to run jenkins with that plugin
+`./gradlew :gdrive-jenkins:server` to run jenkins with that plugin
 
-`gw :plugins:gdrive-upload:jpi` to produce the plugin
+`./gradlew :gdrive-jenkins:jpi` to produce the plugin
 
 The compilation uses `kapt` for annotation processing along with `net.java.sezpoz:sezpoz` to process `@Extension` annotations
 
