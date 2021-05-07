@@ -18,8 +18,8 @@ class MoveCommand : BaseCommand() {
 	@CommandLine.Parameters(paramLabel = "destinationParentFolderId", description = ["Id of the folder containing the destination folder."])
 	lateinit var destinationParentFolderId: String
 
-	@CommandLine.Parameters(paramLabel = "destinationFolderName", description = ["Name of folder which will contain the element to move."])
-	lateinit var destinationFolderName: String
+	@CommandLine.Option(names = ["--destinationFolderName"], description = ["Name of folder which will contain the element to move."])
+	var destinationFolderName: String = ""
 
 
 	override fun run() {

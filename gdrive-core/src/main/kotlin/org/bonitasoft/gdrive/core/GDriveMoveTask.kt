@@ -22,15 +22,19 @@ class GDriveMoveTask(googleCredentials: String,
 
         val sourceElement = execute.files.firstOrNull() ?: throw Exception("No folder $elementName found $sourceId folder")
 
-        val parentFolder = drive.files().list()
-                .setQ("'$destinationParentFolderId' in parents and name = '$destinationFolderName' and trashed = false and  mimeType = '${FOLDER_MIMETYPE}'")
-                .setFields("files(id, name, parents)")
-                .setSupportsAllDrives(true)
-                .setIncludeItemsFromAllDrives(true)
-                .execute().files.firstOrNull() ?: createFolder(drive, destinationFolderName, destinationParentFolderId)
+        var parentFolderId =  destinationParentFolderId
 
+        if(!destinationFolderName.isBlank()) {
+            parentFolderId = (drive.files().list()
+                    .setQ("'$destinationParentFolderId' in parents and name = '$destinationFolderName' and trashed = false and  mimeType = '${FOLDER_MIMETYPE}'")
+                    .setFields("files(id, name, parents)")
+                    .setSupportsAllDrives(true)
+                    .setIncludeItemsFromAllDrives(true)
+                    .execute().files.firstOrNull()
+                    ?: createFolder(drive, destinationFolderName, destinationParentFolderId)).id
+        }
         drive.files().update(sourceElement.id, File().apply { name = renameTo })
-                .setAddParents(parentFolder.id)
+                .setAddParents(parentFolderId)
                 .setRemoveParents(sourceElement.parents[0])
                 .setSupportsAllDrives(true)
                 .execute()
