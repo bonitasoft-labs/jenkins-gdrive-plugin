@@ -19,6 +19,7 @@ class GDriveUploadStepExecution(
 		private val source: String,
 		private val destinationId: String,
 		private val renameTo: String,
+		private val uploadChecksum : Boolean,
 		context: StepContext) : SynchronousNonBlockingStepExecution<Void>(context) {
 
 	override fun run(): Void? {
@@ -27,7 +28,7 @@ class GDriveUploadStepExecution(
 
 			val workspace = context.get(FilePath::class.java)!!
 			logger.println("Starting the upload of $source to the destination $destinationId, all logs will be displayed once the upload is completed")
-			val logs = workspace.child(source).act(UploadFile(googleCredentials, destinationId, renameTo))
+			val logs = workspace.child(source).act(UploadFile(googleCredentials, destinationId, renameTo, uploadChecksum))
 			logs.forEach { logger.println(it) }
 			return null
 		} catch (e: Throwable) {
@@ -39,7 +40,7 @@ class GDriveUploadStepExecution(
 
 }
 
-class UploadFile(val googleCredentials: String, val destinationId: String, val renameTo: String) : FileCallable<List<String>>, Serializable {
+class UploadFile(val googleCredentials: String, val destinationId: String, val renameTo: String, val uploadChecksum: Boolean) : FileCallable<List<String>>, Serializable {
 
 	override fun checkRoles(p0: RoleChecker?) = Unit
 	override fun invoke(file: File?, p1: VirtualChannel?): List<String> {
@@ -64,7 +65,7 @@ class UploadFile(val googleCredentials: String, val destinationId: String, val r
 				logs.add("ERROR: $message")
 			}
 		}
-		GDriveUploadTask(googleCredentials, file.absolutePath, destinationId, gdriveLogger, renameTo).execute()
+		GDriveUploadTask(googleCredentials, file.absolutePath, destinationId, gdriveLogger, renameTo, uploadChecksum).execute()
 		return logs
 	}
 }

@@ -9,6 +9,9 @@ class UploadCommand : BaseCommand() {
 	@CommandLine.Option(names = ["--renameTo"], description = ["Rename the file or folder in to that name."])
 	var renameTo: String = ""
 
+	@CommandLine.Option(names = ["--checksum"], description = ["Whether a sha-256 checksum file should also be uploaded."])
+	var uploadChecksum = false
+
 	@CommandLine.Parameters(paramLabel = "source", description = ["Source path to the file or folder to upload."])
 	lateinit var source: String
 
@@ -16,8 +19,10 @@ class UploadCommand : BaseCommand() {
 	lateinit var destinationId: String
 
 
+
+
 	override fun run() {
-		GDriveUploadTask(parentCommand.creds.readText(), source, destinationId, gdriveLogger, renameTo).execute()
+		GDriveUploadTask(parentCommand.creds.readText(), source, destinationId, gdriveLogger, renameTo, uploadChecksum).execute()
 	}
 
 }
