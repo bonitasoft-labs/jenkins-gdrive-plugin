@@ -9,7 +9,7 @@ To run debug mode on your IDE, add `--debug-jvm`
 
 ## How to upload folder
 
-    ./gradlew run --args " -c path/credentialFile.json upload path/folderToUpload destinationFolderPath --renameTo newFolderName"
+    ./gradlew run --args " -c path/credentialFile.json upload path/folderToUpload destinationFolderId --renameTo newFolderName"
 
 ## How to move folder
 
