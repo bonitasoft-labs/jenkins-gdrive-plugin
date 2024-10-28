@@ -1,5 +1,8 @@
 # Google drive upload plugin
 
+| ⚠️ Archived on `2024-10-28` ⚠️  This repository is no longer in use at Bonitasoft. |
+| -------- | -------- |
+
 This plugin performs upload of directory to a given drive folder
 
 # Configuration
